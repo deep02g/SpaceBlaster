@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAttack : MonoBehaviour
+{
+    private Animator animator;
+    private Test_mov test_movement;
+    private InputManager inputManager = null;
+
+    [SerializeField]private float attackCooldown;
+    [SerializeField]private Transform bulletpoint;
+    [SerializeField]private GameObject[] bullets;
+
+    private float cooldownTimer = Mathf.Infinity;
+    public bool isPlayerControlled = false;
+
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        test_movement = GetComponent<Test_mov>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        SetupInput();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        ProcessInput();
+    }
+
+    void SetupInput()
+    {
+        if (isPlayerControlled)
+        {
+            if (inputManager == null)
+            {
+                inputManager = InputManager.instance;
+            }
+            if (inputManager == null)
+            {
+                Debug.LogError("Player Shooting Controller can not find an InputManager in the scene, there needs to be one in the " +
+                    "scene for it to run");
+            }
+        }
+    }
+
+    void ProcessInput()
+    {
+        if (isPlayerControlled)
+        {
+            if ((inputManager.firePressed || inputManager.fireHeld) && cooldownTimer > attackCooldown)
+            {
+                Fire();
+            }
+            cooldownTimer += Time.deltaTime;
+        }
+    }
+
+    private void Fire()
+    {
+        animator.SetTrigger("fire");
+        cooldownTimer = 0;
+        Debug.Log("Fired. and tranistion occured");
+
+        bullets[findBullet()].transform.position = bulletpoint.position;
+        bullets[findBullet()].GetComponent<test_Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+
+
+    }
+
+    private int findBullet()
+    {
+        for(int i = 0; i < bullets.Length; i++)
+        {
+            if (!bullets[i].activeInHierarchy)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+}
