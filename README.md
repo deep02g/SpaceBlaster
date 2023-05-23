@@ -6,8 +6,11 @@ The game has 3 levels.  It has a dynamic enemy system, it has three types: stati
 It also has a dynamic camera look, with 2D pixelated art. Assets from unity store and icth.io have been used, and it is heavily inspired by Space Invaders.
 The three levels are fully designed and ready to play.
 
--> You can download this repositoty OR You can download the latest build of the game and directly test it from https://github.com/deep02g/SpaceBlaster.exe
+-> You can download this repositoty OR You can download the latest build of the game and directly test it from https://github.com/deep02g/SpaceBlaster.exe 
+
 -> You can also visit https://deep02g.itch.io to play the game on your web browser. 
+
+
 
 
 -> Level 1 is closed and very tight.
