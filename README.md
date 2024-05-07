@@ -1,4 +1,4 @@
-# SpaceBlaster
+# Stardust
 A 2D space shooter game.
 
 This game is inspired from space inavders. The world is in 2D and art is a mix of pixelated art and modern. 
